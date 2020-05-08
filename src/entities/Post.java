@@ -7,15 +7,16 @@ import java.util.List;
 
 public class Post {
 
-	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");//hora constante
 	
 	private Date moment;
 	private String title;
 	private String content;
 	private Integer likes;
 	
-	private List<Comment> comments = new ArrayList<>();
+	private List<Comment> comments = new ArrayList<>();// lista do coments para fazer a composição
 	
+	/*CONSTRUTORS*/
 	public Post() {
 	}
 
@@ -62,6 +63,9 @@ public class Post {
 		return comments;
 	}
 
+	/*OBS: não por a lista no set e como construtor, ao invez disso
+	 * criar os dois metodos abaixo de adicionar e remover, assim os métodos erão resposaveis
+	 * para isso e*/
 	public void addComment(Comment comment) {
 		comments.add(comment);
 	}
@@ -69,18 +73,21 @@ public class Post {
 	public void removeComment(Comment comment) {
 		comments.remove(comment);
 	}
-	
+	/*
+	 * A CLASSE StringBuilder serve para subistituir as concatenaçoes dos strings melhorando e facilitando 
+	 * */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(title + "\n");
 		sb.append(likes);
 		sb.append(" Likes - ");
-		sb.append(sdf.format(moment) + "\n");
+		sb.append(sdf.format(moment) + "\n"); //hora
 		sb.append(content + "\n");
 		sb.append("Comments:\n");
+		//para cada objeto c da lista cooments acrecenta os comentarios
 		for (Comment c : comments) {
 			sb.append(c.getText() + "\n");
 		}
-		return sb.toString();
+		return sb.toString(); //conmverte o stringBuilder para string
 	}
 }
